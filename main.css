@@ -1,0 +1,25 @@
+.container {
+  background: #4e489b;
+  max-width: 40%;
+  margin: 10px;
+  padding: 10px;
+}
+.container .inputsLogin {
+  background-color: #E2E9E1;
+  color: gray;
+}
+.example_module.green {
+  background: #51cc21;
+}
+.example_module.red {
+  background: #df0d0d;
+}
+.example_module.blue {
+  background: #0872fd;
+}
+.example_module.yellow {
+  background: #f9fd08;
+}
+.example_module.pink {
+  background: #e735ca;
+}

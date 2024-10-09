@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css" />
+</head>
+
+<body>
+    <div class="container">
+        <form>
+            <fieldset>
+                <legend>Formulario login</legend>
+                
+                <fieldset>
+                    <legend>Correo</legend>
+                    <label for="email">Correo electrónico</label>
+                    <input type="" id="email" aria-label="Correo electrónico" />
+                </fieldset>
+
+                <fieldset>
+                    <legend>Contraseña</legend>
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" aria-label="Contraseña" />
+                </fieldset>
+            </fieldset>
+
+        
+            <fieldset>
+                <legend>Roles</legend>
+                <ul>
+                    <li class="example_module green">
+                        <input type="checkbox" id="admin" />
+                        <label for="admin">Admin</label>
+                    </li>
+                    <li class="example_module red">
+                        <input type="checkbox" id="gerente" />
+                        <label for="gerente">Gerente</label>
+                    </li>
+                    <li class="example_module blue">
+                        <input type="checkbox" id="propietario" />
+                        <label for="propietario">Propietario</label>
+                    </li>
+                    <li class="example_module yellow">
+                        <input type="checkbox" id="agente" />
+                        <label for="agente">Agente de ventas</label>
+                    </li>
+                    <li class="example_module pink">
+                        <input type="checkbox" id="prospecto" />
+                        <label for="prospecto">Prospecto</label>
+                    </li>
+                </ul>
+            </fieldset>
+
+
+            <button type="submit">Acceder</button>
+        </form>
+
+        <div>
+            <a href="#">¿Olvidaste la contraseña?</a>
+        </div>
+    </div>
+</body>
