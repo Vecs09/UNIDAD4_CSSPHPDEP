@@ -110,7 +110,6 @@
     <div class="row mt-4">
     </div>
   </div>
-
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -119,23 +118,31 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form>
+          <form method="POST" action="app/newProduct.php">
             <div class="mb-3">
-              <label for="email" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="email" placeholder="Enter your email">
-              <div class="form-text">We'll never share your email with anyone else.</div>
+              <label for="name" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="name" name="name" placeholder="Nombre del producto" required>
             </div>
             <div class="mb-3">
-              <label for="password" class="form-label">Password</label>
-              <input type="password" class="form-control" id="password" placeholder="Password">
+              <label for="slug" class="form-label">Palabras claves</label>
+              <input type="text" class="form-control" id="slug" name="slug" placeholder="Palabras clave" required>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="mb-3">
+              <label for="description" class="form-label">Descripcion</label>
+              <textarea class="form-control" id="description" name="description" placeholder="Descripcion del producto" required></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="features" class="form-label">Caracteristicas</label>
+              <textarea class="form-control" id="features" name="features" placeholder="Caracteristicas del producto" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Subir</button>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
           </form>
         </div>
       </div>
     </div>
   </div>
+  
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -151,11 +158,10 @@
                       <img src="${product.cover}" class="card-img-top" alt="${product.name}">
                       <div class="card-body">
                         <h5 class="card-title">${product.name}</h5>
+                        <p class="card-text">${product.slug || 'No slug available.'}</p>
                         <p class="card-text">${product.description || 'No description available.'}</p>
+                        <p class="card-text">${product.features || 'No features available.'}</p>
                           <a href="product.php?id=${product.id}" class="btn btn-primary">Detalles</a>
-                        <button type="button" class="btn btn-warning ms-auto" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                          Añadir
-                        </button>
                         <button type="button" class="btn btn-danger ms-auto" data-bs-toggle="modal">
                           Eliminar
                         </button>

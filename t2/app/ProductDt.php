@@ -8,7 +8,7 @@ if ($productId) {
         CURLOPT_URL => 'https://crud.jonathansoto.mx/api/products/' . $productId,
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_HTTPHEADER => array(
-            'Authorization: Bearer 635|dpQ8rIYnu4zuYBZB71sBeAhBrEtTuTZe8M4SGYjQ'
+            'Authorization: Bearer 78|GhK5Gxcf6SalFQBTw5uodQhs0GT2SR1MDQlNENdM'
         ),
     ));
 
