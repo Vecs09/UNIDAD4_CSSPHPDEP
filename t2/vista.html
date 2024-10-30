@@ -107,9 +107,10 @@
       </div>
     </nav>
 
-    <div class="row mt-4">
-    </div>
+    <div class="row mt-4"></div>
   </div>
+
+  <!-- Modal para Añadir Producto -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -129,11 +130,13 @@
             </div>
             <div class="mb-3">
               <label for="description" class="form-label">Descripcion</label>
-              <textarea class="form-control" id="description" name="description" placeholder="Descripcion del producto" required></textarea>
+              <textarea class="form-control" id="description" name="description" placeholder="Descripcion del producto"
+                required></textarea>
             </div>
             <div class="mb-3">
               <label for="features" class="form-label">Caracteristicas</label>
-              <textarea class="form-control" id="features" name="features" placeholder="Caracteristicas del producto" required></textarea>
+              <textarea class="form-control" id="features" name="features" placeholder="Caracteristicas del producto"
+                required></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Subir</button>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -142,7 +145,41 @@
       </div>
     </div>
   </div>
-  
+
+  <!-- Modal para Editar Producto -->
+  <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalLabel">Editar Producto</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="editForm">
+            <input type="hidden" id="editId" name="id">
+            <div class="mb-3">
+              <label for="nameEdit" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="nameEdit" name="name" required>
+            </div>
+            <div class="mb-3">
+              <label for="slugEdit" class="form-label">Palabras claves</label>
+              <input type="text" class="form-control" id="slugEdit" name="slug" required>
+            </div>
+            <div class="mb-3">
+              <label for="descriptionEdit" class="form-label">Descripción</label>
+              <textarea class="form-control" id="descriptionEdit" name="description" required></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="featuresEdit" class="form-label">Características</label>
+              <textarea class="form-control" id="featuresEdit" name="features" required></textarea>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="submitEditForm()">Actualizar</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -162,7 +199,10 @@
                         <p class="card-text">${product.description || 'No description available.'}</p>
                         <p class="card-text">${product.features || 'No features available.'}</p>
                           <a href="product.php?id=${product.id}" class="btn btn-primary">Detalles</a>
-                        <button type="button" class="btn btn-danger ms-auto" data-bs-toggle="modal">
+                         <button type="button" class="btn btn-info ms-auto" onclick="openEditModal(${product.id}, '${product.name}', '${product.slug}', '${product.description}', '${product.features}')" data-bs-toggle="modal">
+                            Editar
+                        </button>
+                          <button type="button" class="btn btn-danger ms-auto" data-bs-toggle="modal">
                           Eliminar
                         </button>
                       </div>
@@ -174,6 +214,55 @@
         })
         .catch(error => console.error('Error fetching products:', error));
     });
+
+    function openEditModal(id, name, slug, description, features) {
+      document.getElementById('editId').value = id;
+      document.getElementById('nameEdit').value = name;
+      document.getElementById('slugEdit').value = slug;
+      document.getElementById('descriptionEdit').value = description;
+      document.getElementById('featuresEdit').value = features;
+
+      const editModal = new bootstrap.Modal(document.getElementById('editModal'));
+      editModal.show();
+    }
+
+    function submitEditForm() {
+   const id = document.getElementById('editId').value;
+   const name = document.getElementById('nameEdit').value;
+   const slug = document.getElementById('slugEdit').value;
+   const description = document.getElementById('descriptionEdit').value;
+   const features = document.getElementById('featuresEdit').value;
+
+   const data = new URLSearchParams({
+     id: id,
+     name: name,
+     slug: slug,
+     description: description,
+     features: features,
+   });
+
+   fetch(`app/updateProduct.php`, {
+     method: 'POST',  
+     headers: {
+       'Content-Type': 'application/x-www-form-urlencoded',
+     },
+     body: data.toString(),
+   })
+   .then(response => {
+     return response.text().then(text => {
+       console.log('Raw response:', text); 
+       return JSON.parse(text); 
+     });
+   })
+   .then(data => {
+     console.log('Success:', data);
+     location.reload(); 
+   })
+   .catch((error) => {
+     console.error('Error:', error);
+   });
+}
+
   </script>
 
 </body>
