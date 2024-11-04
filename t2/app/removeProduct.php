@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_CUSTOMREQUEST => 'DELETE',
         CURLOPT_HTTPHEADER => array(
-            'Authorization: Bearer 96|pKSTT9Su8HalXfjBMfb6vtICZWDt139klNWnnaF6'
+            'Authorization: Bearer 271|tLoE3pd1hT9B1gtPpqsd2AgpgjbqtwbeEq9NSP1i'
         ),
     ));
 

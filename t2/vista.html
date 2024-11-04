@@ -120,7 +120,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form method="POST" action="app/newProduct.php">
+          <form method="POST" action="app/newProduct.php" enctype="multipart/form-data">
             <div class="mb-3">
               <label for="name" class="form-label">Nombre</label>
               <input type="text" class="form-control" id="name" name="name" placeholder="Nombre del producto" required>
@@ -138,6 +138,10 @@
               <label for="features" class="form-label">Caracteristicas</label>
               <textarea class="form-control" id="features" name="features" placeholder="Caracteristicas del producto"
                 required></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="cover" class="form-label">Imagen</label>
+              <input type="file" class="form-control" id="cover" name="cover" accept="cover/*" required>
             </div>
             <button type="submit" class="btn btn-primary">Subir</button>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>

@@ -11,7 +11,7 @@ curl_setopt_array($curl, array(
   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
   CURLOPT_CUSTOMREQUEST => 'GET',
   CURLOPT_HTTPHEADER => array(
-    'Authorization: Bearer 78|GhK5Gxcf6SalFQBTw5uodQhs0GT2SR1MDQlNENdM'
+    'Authorization: Bearer 271|tLoE3pd1hT9B1gtPpqsd2AgpgjbqtwbeEq9NSP1i'
   ),
 ));
 

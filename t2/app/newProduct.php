@@ -1,10 +1,20 @@
 <?php
 
-if (isset($_POST['name'], $_POST['slug'], $_POST['description'], $_POST['features'])) {
+if (isset($_POST['name'], $_POST['slug'], $_POST['description'], $_POST['features']) && isset($_FILES['cover'])) {
   $name = $_POST['name'];
   $slug = $_POST['slug'];
   $description = $_POST['description'];
   $features = $_POST['features'];
+  $image = $_FILES['cover'];
+
+
+  if ($image['error'] === UPLOAD_ERR_OK) {
+    $imageTmpPath = $image['tmp_name'];
+    $imageName = $image['name'];
+    $imageType = $image['type'];
+  } else {
+    die("Error al cargar la imagen.");
+  }
 
   $curl = curl_init();
   curl_setopt_array($curl, array(
@@ -20,10 +30,11 @@ if (isset($_POST['name'], $_POST['slug'], $_POST['description'], $_POST['feature
       'name' => $name,
       'slug' => $slug,
       'description' => $description,
-      'features' => $features
+      'features' => $features,
+      'cover' => new CURLFile($imageTmpPath, $imageType, $imageName)
     ),
     CURLOPT_HTTPHEADER => array(
-      'Authorization: Bearer 96|pKSTT9Su8HalXfjBMfb6vtICZWDt139klNWnnaF6'
+      'Authorization: Bearer 271|tLoE3pd1hT9B1gtPpqsd2AgpgjbqtwbeEq9NSP1i'
     ),
   ));
 
@@ -33,10 +44,10 @@ if (isset($_POST['name'], $_POST['slug'], $_POST['description'], $_POST['feature
 
   if ($error) {
     echo "cURL Error: " . $error;
-} else {
+  } else {
     header("Location: ../vista.html");
     exit();
-
-} } else {
+  }
+} else {
   echo "Error: Faltan datos en el formulario.";
 }
