@@ -1,15 +1,20 @@
 <?php
-session_start(); // Inicia la sesión
+session_start();
+include 'config.php'; 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'login') {
+    if (!validateCsrfToken($_POST['global_token'])) {
+        die("Petición no válida. Token CSRF no coincide.");
+    }
+
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    $controller = new Controller();
+    $controller = new AuthController();
     $controller->access($email, $password);
 }
 
-class Controller {
+class AuthController {
     public function access($email, $password) {
         $curl = curl_init();
 
@@ -41,7 +46,7 @@ class Controller {
             header("Location: /GitHub/UNIDAD4_CSSPHPDEP/t2/vista.php");
             exit();
         } else {
-            header("Location: login.html");
+            header("Location: login.php");
             exit();
         }
     }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,16 +11,23 @@
         body {
             background-color: white;
         }
+
         .almacen {
             background-color: white;
         }
+
         .image {
             height: 200px;
             width: 200px;
         }
     </style>
 </head>
+
 <body>
+    <?php
+    include 'app/config.php';
+    $token = generateCsrfToken();
+    ?>
     <div class="container">
         <div class="almacen row shadow m-5 justify-content-center ">
             <div class="col-5 col-xs-4">
@@ -37,9 +45,10 @@
                         <label for="exampleInputPassword1" class="form-label">Password</label>
                         <input type="password" class="form-control" id="exampleInputPassword1" name="password" required>
                     </div>
-                  
+
                     <button type="submit" class="btn btn-primary col-12">Submit</button>
                     <input type="hidden" value="login" name="action">
+                    <input type="hidden" name="global_token" value="<?php echo $token; ?>">
                 </form>
             </div>
         </div>
@@ -48,4 +57,5 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 </body>
+
 </html>

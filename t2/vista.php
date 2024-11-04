@@ -4,11 +4,11 @@ ini_set('display_errors', 1);
 
 $curl = curl_init();
 curl_setopt_array($curl, array(
-    CURLOPT_URL => 'https://crud.jonathansoto.mx/api/brands',
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_HTTPHEADER => array(
-        'Authorization: Bearer 271|tLoE3pd1hT9B1gtPpqsd2AgpgjbqtwbeEq9NSP1i',
-    ),
+  CURLOPT_URL => 'https://crud.jonathansoto.mx/api/brands',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_HTTPHEADER => array(
+    'Authorization: Bearer 271|tLoE3pd1hT9B1gtPpqsd2AgpgjbqtwbeEq9NSP1i',
+  ),
 ));
 
 $response = curl_exec($curl);
@@ -18,11 +18,11 @@ $marcas = json_decode($response)->data ?? [];
 ?>
 <!DOCTYPE html>
 <html lang="en">
-  
+
 
 <head>
   <meta charset="UTF-8">
-  
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Products</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -71,6 +71,7 @@ $marcas = json_decode($response)->data ?? [];
 </style>
 
 <body>
+  
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
@@ -172,8 +173,8 @@ $marcas = json_decode($response)->data ?? [];
                 <?php endif; ?>
               </select>
             </div>
-          
-    
+
+
             <div class="mb-3">
               <label for="cover" class="form-label">Imagen</label>
               <input type="file" class="form-control" id="cover" name="cover" accept="cover/*" required>
@@ -222,8 +223,7 @@ $marcas = json_decode($response)->data ?? [];
   </div>
 
   <script>
-    
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
       fetch('app/Products.php')
         .then(response => response.json())
         .then(data => {
@@ -271,63 +271,61 @@ $marcas = json_decode($response)->data ?? [];
     }
 
     function submitEditForm() {
-   const id = document.getElementById('editId').value;
-   const name = document.getElementById('nameEdit').value;
-   const slug = document.getElementById('slugEdit').value;
-   const description = document.getElementById('descriptionEdit').value;
-   const features = document.getElementById('featuresEdit').value;
+      const id = document.getElementById('editId').value;
+      const name = document.getElementById('nameEdit').value;
+      const slug = document.getElementById('slugEdit').value;
+      const description = document.getElementById('descriptionEdit').value;
+      const features = document.getElementById('featuresEdit').value;
 
-   const data = new URLSearchParams({
-     id: id,
-     name: name,
-     slug: slug,
-     description: description,
-     features: features,
-   });
+      const data = new URLSearchParams({
+        id: id,
+        name: name,
+        slug: slug,
+        description: description,
+        features: features,
+      });
 
-   fetch(`app/updateProduct.php`, {
-     method: 'POST',  
-     headers: {
-       'Content-Type': 'application/x-www-form-urlencoded',
-     },
-     body: data.toString(),
-   })
-   .then(response => {
-     return response.text().then(text => {
-       console.log('Raw response:', text); 
-       return JSON.parse(text); 
-     });
-   })
-   .then(data => {
-     console.log('Success:', data);
-     location.reload(); 
-   })
-   .catch((error) => {
-     console.error('Error:', error);
-   });
-}
-function remove(id) {
-    swal({
-        title: "Are you sure?",
-        text: "Once deleted, you will not be able to recover this imaginary file!",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-    })
-    .then((willDelete) => {
-        if (willDelete) {
+      fetch(`app/updateProduct.php`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: data.toString(),
+        })
+        .then(response => {
+          return response.text().then(text => {
+            console.log('Raw response:', text);
+            return JSON.parse(text);
+          });
+        })
+        .then(data => {
+          console.log('Success:', data);
+          location.reload();
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    }
+
+    function remove(id) {
+      swal({
+          title: "Are you sure?",
+          text: "Once deleted, you will not be able to recover this imaginary file!",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
             document.getElementById(`deleteForm-${id}`).submit();
             swal("Poof! Your imaginary file has been deleted!", {
-                icon: "success",
+              icon: "success",
             });
-        } else {
+          } else {
             swal("Your imaginary file is safe!");
-        }
-    });
-}
-
-
-
+          }
+        });
+    }
   </script>
 
 </body>

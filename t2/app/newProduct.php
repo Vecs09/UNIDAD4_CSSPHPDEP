@@ -1,5 +1,6 @@
 <?php
 
+
 if (isset($_POST['name'], $_POST['slug'], $_POST['description'], $_POST['features']) && isset($_FILES['cover'])) {
   $name = $_POST['name'];
   $slug = $_POST['slug'];
