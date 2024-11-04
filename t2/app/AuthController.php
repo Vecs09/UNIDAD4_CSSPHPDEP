@@ -38,7 +38,7 @@ class Controller {
 
         if (isset($response->data) && is_object($response->data)) {
             $_SESSION['user_data'] = $response->data;
-            header("Location: /GitHub/UNIDAD4_CSSPHPDEP/t2/vista.html");
+            header("Location: /GitHub/UNIDAD4_CSSPHPDEP/t2/vista.php");
             exit();
         } else {
             header("Location: login.html");

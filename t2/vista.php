@@ -1,8 +1,28 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+$curl = curl_init();
+curl_setopt_array($curl, array(
+    CURLOPT_URL => 'https://crud.jonathansoto.mx/api/brands',
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_HTTPHEADER => array(
+        'Authorization: Bearer 271|tLoE3pd1hT9B1gtPpqsd2AgpgjbqtwbeEq9NSP1i',
+    ),
+));
+
+$response = curl_exec($curl);
+curl_close($curl);
+
+$marcas = json_decode($response)->data ?? [];
+?>
 <!DOCTYPE html>
 <html lang="en">
+  
 
 <head>
   <meta charset="UTF-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Products</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -111,7 +131,6 @@
     <div class="row mt-4"></div>
   </div>
 
-  <!-- Modal para Añadir Producto -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -139,6 +158,22 @@
               <textarea class="form-control" id="features" name="features" placeholder="Caracteristicas del producto"
                 required></textarea>
             </div>
+            <div class="mb-3">
+              <label for="brandSelect" class="form-label">Marca</label>
+              <select class="form-control" id="brandSelect" name="brand" required>
+                <?php if (isset($marcas) && count($marcas)): ?>
+                  <?php foreach ($marcas as $marca): ?>
+                    <option value="<?= htmlspecialchars($marca->id) ?>">
+                      <?= htmlspecialchars($marca->name) ?>
+                    </option>
+                  <?php endforeach; ?>
+                <?php else: ?>
+                  <option value="">No hay marcas disponibles</option>
+                <?php endif; ?>
+              </select>
+            </div>
+          
+    
             <div class="mb-3">
               <label for="cover" class="form-label">Imagen</label>
               <input type="file" class="form-control" id="cover" name="cover" accept="cover/*" required>
@@ -187,6 +222,7 @@
   </div>
 
   <script>
+    
     document.addEventListener('DOMContentLoaded', function () {
       fetch('app/Products.php')
         .then(response => response.json())

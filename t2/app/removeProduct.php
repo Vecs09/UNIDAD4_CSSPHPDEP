@@ -17,5 +17,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
     curl_close($curl);
 
     // Opcionalmente, redirecciona o muestra un mensaje
-    header("Location: ../vista.html");
+    header("Location: ../vista.php");
 }

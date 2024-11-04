@@ -45,7 +45,7 @@ if (isset($_POST['name'], $_POST['slug'], $_POST['description'], $_POST['feature
   if ($error) {
     echo "cURL Error: " . $error;
   } else {
-    header("Location: ../vista.html");
+    header("Location: ../vista.php");
     exit();
   }
 } else {

@@ -98,7 +98,7 @@
                 <div class="card-body">
                     <h5 class="card-title"><?php echo htmlspecialchars($name); ?></h5>
                     <p class="card-text"><?php echo htmlspecialchars($description); ?></p>
-                    <a href="vista.html" class="btn btn-primary">Volver a productos</a>
+                    <a href="vista.php" class="btn btn-primary">Volver a productos</a>
                 </div>
             </div>
         </div>
